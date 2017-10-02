@@ -1,11 +1,14 @@
 var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope, $http) {
+app.controller('myCtrl', function($scope, quotesService, MathService) {
+$scope.getQuote=function(){
+    quotesService
+        .getQuote()
+        .then (function(response){
+            $scope.myWelcome=response
+        })
+};
 
-    $scope.getQuote = function() {
+  var answer =  MathService.addNumbers(1,2)
+  console.log(answer)
 
-        $http.get("https://talaikis.com/api/quotes/random/").then(function(response) {
-            $scope.myWelcome = response.data;
-        });
-
-    };
 });
